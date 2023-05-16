@@ -105,16 +105,76 @@ public class FXMLDocumentController implements Initializable {
         seek.setOnMouseDragExited((MouseEvent event1) -> {
             mediaPlayer.seek(Duration.seconds(seek.getValue()));
         });
-        
+
         mediaPlayer.play();
         PLAY = 1;
         Image imagePause = new Image(getClass().getResourceAsStream("/image/00.png"));
         playPause.setGraphic(new ImageView(imagePause));
     }
 
+    @FXML
+    private void seekBackward(ActionEvent event) {
+        mediaPlayer.setRate(0.5);
+    }
+
+    @FXML
+    private void backward(ActionEvent event) {
+        if (INDEX > 0) {
+            INDEX--;
+            playMedia(INDEX);
+        }
+    }
+
+    @FXML
+    private void stop(ActionEvent event) {
+        mediaPlayer.stop();
+        Image imagePlay = new Image(getClass().getResourceAsStream("/images/5.png"));
+        playPause.setGraphic(new ImageView(imagePlay));
+        PLAY = 0;
+    }
+
+    @FXML
+    private void pausePlay(ActionEvent event) {
+        if(!playlist.isEmpty()){
+            if(PLAY == 1) {
+                mediaPlayer.pause();
+                Image imagePlay = new Image(getClass().getResourceAsStream("/images/5.png"));
+                playPause.setGraphic(new ImageView(imagePlay));
+                PLAY = 0;
+            }else{
+                mediaPlayer.play();
+                Image imagePause = new Image(getClass().getResourceAsStream("/image/00.png"));
+                playPause.setGraphic(new ImageView(imagePause));
+                PLAY = 1;
+            }
+        }else {
+            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            dialog.setTitle("Message");
+            dialog.setContentText("Please open media!");
+            dialog.setOnCloseRequest((DialogEvent event1) -> {
+                dialog.close();
+            });
+            dialog.initStyle(StageStyle.DECORATED);
+            dialog.initModality(Modality.NONE);
+            dialog.show();
+        }
+    }
+
+    @FXML
+    private void forward(ActionEvent event) {
+        if(INDEX >= 0 && INDEX < playlist.size()) {
+            INDEX++;
+            playMedia(INDEX);
+        }
+    }
+
+    @FXML
+    private void seekforward(ActionEvent event) {
+        mediaPlayer.setRate(1.5);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
 }
