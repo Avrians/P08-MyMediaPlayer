@@ -1,4 +1,5 @@
 package mymediaplayer;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 
 public class FXMLDocumentController implements Initializable {
+
     private MediaPlayer mediaPlayer;
 
     @FXML
@@ -89,8 +91,25 @@ public class FXMLDocumentController implements Initializable {
         width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
         height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         mediaView.setPreserveRatio(true);
+
+        volume.setValue(50);
+        volume.valueProperty().addListener((Observable observable) -> {
+            mediaPlayer.setVolume(volume.getValue() / 100);
+        });
+        mediaPlayer.currentTimeProperty().addListener((ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) -> {
+            seek.setValue(newValue.toSeconds());
+        });
+        seek.setOnMouseClicked((MouseEvent event1) -> {
+            mediaPlayer.seek(Duration.seconds(seek.getValue()));
+        });
+        seek.setOnMouseDragExited((MouseEvent event1) -> {
+            mediaPlayer.seek(Duration.seconds(seek.getValue()));
+        });
         
-        
+        mediaPlayer.play();
+        PLAY = 1;
+        Image imagePause = new Image(getClass().getResourceAsStream("/image/00.png"));
+        playPause.setGraphic(new ImageView(imagePause));
     }
 
     @Override
