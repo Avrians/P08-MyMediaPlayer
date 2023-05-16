@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <VBox prefHeight="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="bPane" alignment="CENTER" prefHeight="50.0">
+               <children>
+                  <MenuButton mnemonicParsing="false" text="Open...">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Open Files(s)" />
+                      <MenuItem mnemonicParsing="false" text="Open Folder" />
+                        <MenuItem mnemonicParsing="false" text="Open Playlist" />
+                    </items>
+                  </MenuButton>
+                  <Button mnemonicParsing="false" text="&lt;&lt;" />
+                  <Button mnemonicParsing="false" text="&lt;" />
+                  <Button mnemonicParsing="false" text="Stop" />
+                  <Button fx:id="playPause" mnemonicParsing="false" text="Play" />
+                  <Button mnemonicParsing="false" text="&gt;" />
+                  <Button mnemonicParsing="false" text="&gt;&gt;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>
